@@ -32,5 +32,7 @@ typedef struct s_xmp
 
 char	**ft_split(char *str, char c);
 int		ft_atoi(char *nptr);
+int		fill_mat(int fd, t_xpm *xpm);
+t_xpm	*xpm_parsing(char *file);
 
 #endif

@@ -69,7 +69,8 @@ int	fill_values(int fd, t_xpm *xpm)
 	while (++i < xpm->nb_color)
 	{
 		buff = get_next_line(fd);
-		get_str(buff, xpm, i);
+		if (!get_str(buff, xpm, i))
+			return (1);
 		xpm->values[i] = get_color(buff);
 		free(buff);
 	}
@@ -91,36 +92,27 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-void	xpm_parsing(char *file)
+t_xpm	*xpm_parsing(char *file)
 {
 	int		fd;
 	t_xpm	*xpm;
-	char	*buff;
 	char	**tab;
 
 	xpm = malloc(sizeof(t_xpm));
-	if (!file || !xpm)
-		return ;
 	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return ;
+	if (!xpm || fd == -1)
+		return (NULL);
 	free(get_next_line(fd));
 	free(get_next_line(fd));
 	tab = ft_split(get_next_line(fd), ' ');
+	if (!tab)
+		return (NULL);
 	xpm->nb_colomn = ft_atoi(tab[0] + 1);
 	xpm->nb_row = ft_atoi(tab[1]);
 	xpm->nb_color = ft_atoi(tab[2]);
 	xpm->nb_char = ft_atoi(tab[3]);
 	free_tab(tab);
-	fill_values(fd, xpm);
-	free(get_next_line(fd));
-	buff = get_next_line(fd);
-	printf("%s", buff);
-	// return (xpm);
-}
-
-int	main(void)
-{
-	xpm_parsing("./test.xpm");
-	return (0);
+	if (fill_values(fd, xpm) || fill_mat(fd, xpm))
+		return (NULL);
+	return (xpm);
 }

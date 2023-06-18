@@ -1,16 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awalter <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/15 16:56:55 by awalter           #+#    #+#             */
-/*   Updated: 2023/04/15 16:56:56 by awalter          ###   ########.fr       */
+/*   Created: 2023/06/18 11:31:34 by awalter           #+#    #+#             */
+/*   Updated: 2023/06/18 11:31:35 by awalter          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "xpm_parser.h"
+
+int	ft_atoi(char *nptr)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	n = 0;
+	while (nptr[i])
+	{
+		if ('0' <= nptr[i] && nptr[i] <= '9')
+			n = n * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (n);
+}
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
