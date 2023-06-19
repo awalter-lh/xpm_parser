@@ -114,5 +114,6 @@ t_xpm	*xpm_parsing(char *file)
 	free_tab(tab);
 	if (fill_values(fd, xpm) || fill_mat(fd, xpm))
 		return (NULL);
+	close(fd);
 	return (xpm);
 }
