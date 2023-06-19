@@ -116,9 +116,3 @@ t_xpm	*xpm_parsing(char *file)
 		return (NULL);
 	return (xpm);
 }
-
-int	main(void)
-{
-	xpm_parsing("./test.xpm");
-	return (0);
-}
